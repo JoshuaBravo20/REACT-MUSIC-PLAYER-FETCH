@@ -53,10 +53,44 @@ button {
     position: absolute;
 }
 
+.volume {
+    color: rgb(208, 216, 202);
+    font-size: 30px;
+    margin-right: 900px;
+}
+
+.form-range {
+    margin-left: 20px;
+}
+
 .hiding {
     display: none;
 }
 
+.btn-link {
+    color: white !important;
+    position: absolute;
+    margin-right: 700px;
+}
+
+.btn-link:hover {
+    color: rgb(1, 155, 206) !important;
+    position: absolute;
+    margin-right: 700px;
+}
+
+.vDown {
+    color: white !important;
+    position: absolute;
+    margin-right: 800px;
+}
+
+.vDown:hover {
+    color: rgb(1, 155, 206) !important;
+    position: absolute;
+    margin-right: 800px;
+}
+
 .selected {
-    background-color: blue;
+    background-color: rgb(43, 187, 134) !important;
 }
