@@ -2,24 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  
   const [songs, setSongs] = useState([]);
 
-  const apiURL = 'https://assets.breatheco.de/apis/sound/';
+  const apiURL = "https://assets.breatheco.de/apis/sound/";
 
   let fetchSongs = () => {
-    fetch('https://assets.breatheco.de/apis/sound/songs')
-    .then((response) => {
-      return response.json();
-    })
-    .then ((data) => {
-      setSongs((prevState) => {
-        return data;
+    fetch("https://assets.breatheco.de/apis/sound/songs")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setSongs((prevState) => {
+          return data;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
   };
 
   useEffect(() => {
@@ -27,29 +26,28 @@ function App() {
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(null);
+  let track = useRef(null);
 
   let newSongs = songs.map((index, i) => {
     return (
       <>
         <li
-          key={i}
-          className='list-group-item bg-dark text-white'
+          key={index.id}
+          className="list-group-item bg-dark text-white"
           onClick={() => {
             setCurrentIndex(i);
-            console.log(currentIndex);
             track.current.src = apiURL + index.url;
             playRef.current.className = "hiding";
             pauseRef.current.className = "btn btn-primary btn-lg";
           }}
         >
           <span className="count">{i + 1} </span>
-          {index.name}
+          {index.name} 
         </li>
       </>
     );
   });
 
-  let track = useRef(null);
   let playRef = useRef(null);
   let pauseRef = useRef(null);
 
@@ -98,7 +96,7 @@ function App() {
     if (track.current.volume < 0.9) {
       track.current.volume += 0.2;
     }
-  } 
+  }
 
   function volumeDown() {
     if (track.current.volume > 0.1) {
@@ -106,13 +104,13 @@ function App() {
     }
   }
 
-  console.log(songs.length);
-
   return (
     <>
       <div className="container-fluid">
         <div className="row">
-          <ul className="list-group">{newSongs}</ul>
+          <ul className="list-group">
+            {newSongs}
+          </ul>
         </div>
         <audio ref={track} src={null} key={null} controls autoPlay />
         <div className="buttonsBar">
@@ -152,5 +150,6 @@ function App() {
     </>
   );
 }
+
 
 export default App;
